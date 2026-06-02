@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Lot — La Jolla Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #003A7E;
+      color: #ffffff;
+      min-height: 100vh;
+    }
+    header {
+      background: #002860;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      border-bottom: 3px solid #3D93F7;
+    }
+    .logo img {
+      height: 40px;
+      filter: brightness(0) invert(1);
+    }
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(61,147,247,0.15);
+      border: 1px solid rgba(61,147,247,0.4);
+      border-radius: 999px;
+      padding: 0.45rem 1rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    .hero {
+      background: #002860;
+      padding: 4rem 3rem 3.5rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(61,147,247,0.25);
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #3D93F7;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #ffffff;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: #3D93F7; }
+    .hero p {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.06em;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .stats {
+      display: flex;
+      border-bottom: 1px solid rgba(61,147,247,0.2);
+    }
+    .stat {
+      flex: 1;
+      padding: 1.8rem 2rem;
+      border-right: 1px solid rgba(61,147,247,0.2);
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .stat:last-child { border-right: none; }
+    .stat:hover { background: rgba(61,147,247,0.07); }
+    .stat-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 0.5rem;
+    }
+    .stat-value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+    .stat-value.blue { color: #3D93F7; }
+
+    .dashboard { padding: 2.5rem 3rem 3.5rem; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .section-title {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(61,147,247,0.25);
+    }
+    .iframe-wrap {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid rgba(61,147,247,0.3);
+      background: #001f4d;
+    }
+    .iframe-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+
+    footer {
+      background: #002860;
+      border-top: 3px solid #3D93F7;
+      padding: 1.4rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    footer .highlight { color: #3D93F7; }
+
+    @media (max-width: 768px) {
+      header, .hero, .dashboard, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .stats { flex-direction: column; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(61,147,247,0.2); }
+      .stat:last-child { border-bottom: none; }
+      .iframe-wrap iframe { height: 420px; }
+      .hero h1 { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="https://cdn.theatertoolkit.com/cdn/wwwroot/themes/custom/thelotent/images/logo-light.svg?v=20260511.1" alt="The Lot">
+    </div>
+    <div class="live-badge">
+      <span class="dot"></span>
+      Live Data
+    </div>
+  </header>
+
+  <div class="hero">
+    <p class="hero-eyebrow">Operations Center</p>
+    <h1>La <span>Jolla</span></h1>
+    <p>Real-time system monitoring, disk usage, memory performance and operational metrics for the La Jolla location.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">Location</div>
+      <div class="stat-value">La Jolla</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Address</div>
+      <div class="stat-value" style="font-size:0.85rem;">7611 Fay Ave</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Status</div>
+      <div class="stat-value blue">Online</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Data Feed</div>
+      <div class="stat-value blue">Live</div>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <div class="section-header">
+      <span class="section-title">Power BI Dashboard — La Jolla</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="iframe-wrap">
+      <iframe
+        title="LA JOLLA"
+        src="https://app.powerbi.com/reportEmbed?reportId=5f9dbc4f-c1b3-494a-944a-49eea57b389b&autoAuth=true&ctid=b8a09021-737e-4c48-84f1-7d6f90d1523f"
+        frameborder="0"
+        allowFullScreen="true">
+      </iframe>
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2025 The Lot Entertainment</span>
+    <span>La Jolla Monitoring &middot; <span class="highlight">Powered by Power BI</span></span>
+  </footer>
+
+</body>
+</html>
